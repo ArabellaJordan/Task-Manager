@@ -2,6 +2,7 @@ const express = require("express");
 const taskRoutes = require("./routes/tasks");
 const connectDB = require("./db/connection");
 const notFound = require("./middleware/not-found");
+const cors = require("cors");
 
 require("dotenv").config();
 
@@ -9,12 +10,8 @@ const app = express();
 const port = 3000;
 
 // middleware
+app.use(cors());
 app.use(express.json());
-
-// routes
-// app.get("/", (req, res) => {
-//   res.send("This is task manager");
-// });
 
 app.use("/api/tasks", taskRoutes);
 app.use(notFound);
